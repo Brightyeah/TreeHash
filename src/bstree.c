@@ -36,3 +36,17 @@ void bstree_add(struct bstree *tree, char *value, int key)
         tree->right = add;
     }
 }
+
+struct bstree *bstree_lookup(struct bstree *tree, int key)
+{
+    while (tree != NULL) {
+        if (key == tree->key) {
+            return tree;
+        } else if (key < tree->key) {
+            tree = tree->left;
+        } else {
+            tree = tree->right;
+        }
+    }
+    return tree;
+}

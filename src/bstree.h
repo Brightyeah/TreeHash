@@ -12,7 +12,7 @@ struct bstree{
 
 struct bstree *bstree_create(char *value, int key);
 void bstree_add(struct bstree *tree, char *value, int key);
-struct bstree *bstree_lookup(struct bstree *tree, char *value);
+struct bstree *bstree_lookup(struct bstree *tree, int key);
 struct bstree *bstree_min(struct bstree *tree);
 struct bstree *bstree_max(struct bstree *tree);
 #endif
