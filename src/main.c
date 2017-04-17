@@ -4,13 +4,36 @@
 #include <sys/time.h>
 #include <inttypes.h>
 #include <string.h>
+#include <malloc.h>
 
 double wtime();
 int getrand(int min, int max);
 
 int main()
 {
-    
+    struct bstree *tree, *node;
+    char *word, *w;
+    word = malloc(sizeof(char)*90);
+    int i = 0, n, t;
+    FILE *stream;
+    stream = fopen("wap.txt", "r");
+    scanf("%d", &n);
+    fgets(word, 90, stream);
+    tree = bstree_create(word, i);
+    for (i++; i < n - 1; i++) {
+        fgets(word, 90, stream);
+        bstree_add(tree, word, i);
+        if ((i % n) == 0) {
+            w = word[getrand(0, i-1)];
+            t = wtime();
+            node = bstree_lookup(tree, w);
+            t = wtime() - t;
+            printf("n = %d, time = %.6f\n", i-1, t);
+        }
+    }
+    free(word);
+    fclose(stream);
+    return 0;
 }
 
 int getrand(int min, int max)
