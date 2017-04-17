@@ -50,3 +50,25 @@ struct bstree *bstree_lookup(struct bstree *tree, int key)
     }
     return tree;
 }
+
+struct bstree *bstree_min(struct bstree *tree)
+{
+    if (tree == NULL) {
+        return NULL;
+    }
+    while (tree->left != NULL) {
+        tree = tree->left;
+    }
+    return tree;
+}
+
+struct bstree *bstree_max(struct bstree *tree)
+{
+    if (tree == NULL) {
+        return NULL;
+    }
+    while (tree->right != NULL) {
+        tree = tree->right;
+    }
+    return tree;
+}
