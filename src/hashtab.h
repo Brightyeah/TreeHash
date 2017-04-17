@@ -1,6 +1,6 @@
 #ifndef HASHTAB_H
 #define HASHTAB_H
-#define HASH_SIZE 128
+#define HASH_SIZE 71
 #define HASH_MUL 31
 
 struct listnode {

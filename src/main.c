@@ -1,9 +1,9 @@
-#include "bstree.h"
+#include "hashtab.h"
 #include <stdio.h>
 
 int main()
 {
-    struct bstree *tree;
+    struct listnode *hash;
 
     return 0;
 }
