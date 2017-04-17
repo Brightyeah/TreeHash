@@ -3,19 +3,32 @@
 #include <string.h>
 #include <malloc.h>
 
-unsigned int kp_hash(char *value)
+unsigned int hashtab_hash(char *value)
 {
-    unsigned int kp = 0;
-    char *pkey;
-    for (pkey = key; *pkey != '\0'; pkey++) {
-        kp = kp * HASH_MUL + (unsigned int)*pkey;
+    unsigned int h = 0;
+    char *p;
+    for (p = value; *p != '\0'; p++) {
+        h = h * HASH_MUL + (unsigned int)*p;
     }
-    return kp % HASH_SIZE;
+    return h % HASH_SIZE;
 }
 
 void hashtab_init(struct listnode **hashtab)
 {
     for (int i = 0; i < HASH_SIZE; i++) {
         hashtab[i] = NULL;
+    }
+}
+
+void hashtab_add(struct listnode **hashtab, char *value, int key)
+{
+    struct listnode *add;
+    int index = hashtab_hash(value);
+    add = malloc(sizeof(*add));
+    if (add != NULL) {
+        add->value = value;
+        add->key = key;
+        add->next = hashtab[index];
+        hashtab[index] = add;
     }
 }
