@@ -1,5 +1,7 @@
 #include "bstree.h"
 #include <malloc.h>
+#include <stdlib.h>
+#include <string.h>
 
 struct bstree *bstree_create(char *value, int key)
 {
