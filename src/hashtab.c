@@ -32,3 +32,15 @@ void hashtab_add(struct listnode **hashtab, char *value, int key)
         hashtab[index] = add;
     }
 }
+
+struct listnode *hashtab_lookup(struct listnode **hashtab, char *value)
+{
+    int index = hashtab_hash(value);
+    struct listnode *node;
+    for (node = hashtab[index]; node != NULL; node = node->next) {
+        if (strcmp(node->value, value) == 0) {
+            return node;
+        }
+    }
+    return NULL;
+}
