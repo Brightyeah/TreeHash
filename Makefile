@@ -5,7 +5,7 @@ FO2 = build/bstree.o
 FC1 = src/main.c
 FC2 = src/bstree.c
 PROG = bin/main
-GFLAG = gcc -Wall -Werror -o
+GFLAG = gcc -Wall -o
 
 all: clean dir $(PROG)
 

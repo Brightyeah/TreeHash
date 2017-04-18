@@ -11,28 +11,23 @@ int getrand(int min, int max);
 
 int main()
 {
-    struct bstree *tree/*, *node*/;
-    char *word/*, *w*/;
-    word = malloc(sizeof(char)*90);
-    int i = 0, n;
+    int i = 0, n = 10, key;
+    struct bstree *tree, *node;
+    char word[n][25];
     double t;
     FILE *stream;
     stream = fopen("wap.txt", "r");
-    scanf("%d", &n);
-    fgets(word, 90, stream);
-    tree = bstree_create(word, i);
-    for (i++; i < n - 1; i++) {
-        fgets(word, 90, stream);
-        bstree_add(tree, word, i);
-        if ((i % n) == 0) {
-            //w = word[getrand(0, i-1)];
-            t = wtime();
-            //node = bstree_lookup(tree, w);
-            t = wtime() - t;
-            printf("n = %d, time = %.6f\n", i-1, t);
-        }
+    fscanf(stream, "%s", word[0]);
+    tree = bstree_create(word[0], i);
+    for (i = 1; i < n; i++) {
+        fscanf(stream, "%s", word[i]);
+        bstree_add(tree, word[i], i);
     }
-    free(word);
+    key = getrand(0, n-1);
+    t = wtime();
+    node = bstree_lookup(tree, key);
+    t = wtime() - t;
+    printf("%d %.6f\n", n, t);
     fclose(stream);
     return 0;
 }
