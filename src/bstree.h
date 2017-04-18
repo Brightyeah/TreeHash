@@ -7,7 +7,6 @@ struct bstree{
     int key;
     struct bstree *left;
     struct bstree *right;
-	struct bstree *parent;
 };
 
 struct bstree *bstree_create(char *value, int key);
