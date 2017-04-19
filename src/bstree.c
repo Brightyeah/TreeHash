@@ -10,7 +10,8 @@ struct bstree *bstree_create(char *value, int key)
     if (create != NULL) {
         create->value = value;
         create->key = key;
-        create->left = create->right = NULL;
+        create->left = NULL;
+        create->right = NULL;
     }
     return create;
 }
@@ -21,7 +22,7 @@ void bstree_add(struct bstree *tree, char *value, int key)
     if (tree == NULL) {
         return;
     }
-    while (tree != NULL) {
+    for (parent = tree; tree != NULL;) {
         parent = tree;
         if (key < tree->key) {
             tree = tree->left;
@@ -34,7 +35,7 @@ void bstree_add(struct bstree *tree, char *value, int key)
     add = bstree_create(value, key);
     if (key < parent->key) {
         tree->left = add;
-    } else if (key > parent->key) {
+    } else {
         tree->right = add;
     }
 }
