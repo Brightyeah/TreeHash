@@ -5,13 +5,12 @@ FO2 = build/hashtab.o
 FC1 = src/main.c
 FC2 = src/hashtab.c
 PROG = bin/main
-GFLAG = gcc -Wall -Werror -o
+GFLAG = gcc -Wall -o
 
 all: clean dir $(PROG)
 
 dir:
 	mkdir build
-	mkdir bin
 
 $(FO1): $(FC1) src/hashtab.h
 	$(GFLAG) $(FO1) -c $(FC1)
@@ -24,4 +23,4 @@ $(PROG): $(FO1) $(FO2)
 
 clean:
 	rm -rf build
-	rm -rf bin
+	rm -rf bin/*.exe
