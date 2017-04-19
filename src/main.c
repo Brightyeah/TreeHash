@@ -15,7 +15,7 @@ int main()
     struct bstree *tree, *node;
     printf("Enter n: ");
     scanf("%d", &n);
-    char word[n][100];
+    char word[n][30];
     double t;
     FILE *stream;
     stream = fopen("bin/wap.txt", "r");

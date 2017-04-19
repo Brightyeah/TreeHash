@@ -1,3 +1,4 @@
 *.o
 build/*.o
 bin/*.exe
+bin/main
