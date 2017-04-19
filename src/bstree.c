@@ -34,9 +34,9 @@ void bstree_add(struct bstree *tree, char *value, int key)
     }
     add = bstree_create(value, key);
     if (key < parent->key) {
-        tree->left = add;
+        parent->left = add;
     } else {
-        tree->right = add;
+        parent->right = add;
     }
 }
 

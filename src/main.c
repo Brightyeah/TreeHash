@@ -13,13 +13,17 @@ int main()
 {
     int i = 0, n = 10/*, key*/;
     struct bstree *tree/*, *node*/;
-    char **word = malloc(n*30*sizeof(char));
+    char word[n][100];
     double t;
     FILE *stream;
-    stream = fopen("wap.txt", "r");
+    stream = fopen("bin/wap.txt", "r");
+        if (stream == NULL) {
+        printf("wap.txt cannot be opened");
+        return 1;
+    }
     fscanf(stream, "%s", word[0]);
     tree = bstree_create(word[0], i);
-    for (i = 1; i < n - 1; i++) {
+    for (i = 1; i < n; i++) {
         fscanf(stream, "%s", word[i]);
         bstree_add(tree, word[i], i);
     }
@@ -28,7 +32,6 @@ int main()
     //node = bstree_lookup(tree, key);
     t = wtime() - t;
     printf("%d %.6f\n", n, t);
-    free(word);
     fclose(stream);
     return 0;
 }

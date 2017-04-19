@@ -11,7 +11,6 @@ all: clean dir $(PROG)
 
 dir:
 	mkdir build
-	mkdir bin
 
 $(FO2): $(FC2)
 	$(GFLAG) $(FO2) -c $(FC2)
@@ -24,4 +23,4 @@ $(PROG): $(FO1) $(FO2)
 
 clean:
 	rm -rf build
-	rm -rf bin
+	rm -rf bin/*.exe
