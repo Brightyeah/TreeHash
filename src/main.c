@@ -11,8 +11,10 @@ int getrand(int min, int max);
 
 int main()
 {
-    int i = 0, n = 10/*, key*/;
-    struct bstree *tree/*, *node*/;
+    int i = 0, n, key;
+    struct bstree *tree, *node;
+    printf("Enter n: ");
+    scanf("%d", &n);
     char word[n][100];
     double t;
     FILE *stream;
@@ -27,9 +29,9 @@ int main()
         fscanf(stream, "%s", word[i]);
         bstree_add(tree, word[i], i);
     }
-    //key = getrand(0, n-1);
+    key = getrand(1, n-1);
     t = wtime();
-    //node = bstree_lookup(tree, key);
+    node = bstree_lookup(tree, key);
     t = wtime() - t;
     printf("%d %.6f\n", n, t);
     fclose(stream);
