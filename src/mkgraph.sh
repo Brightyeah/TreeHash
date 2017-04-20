@@ -18,4 +18,5 @@ set rmargin 4
 set tmargin 2
 set mxtics
 
-plot "tree.dat" using 1:2 title " hash.dat" with line ls 1
+plot "tree.dat" using 1:2 title " hash.dat" with line ls 1,\
+	"hash.dat" using 1:2 title "Hash" with line ls 2
