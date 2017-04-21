@@ -11,16 +11,16 @@ int getrand(int min, int max);
 
 int main()
 {
-    int i = 0, n, key;
+    int i = 0, n/*, key*/;
     struct bstree *tree, *node;
     printf("Enter n: ");
     scanf("%d", &n);
     char word[n][30];
     double t;
     FILE *stream;
-    stream = fopen("bin/wap.txt", "r");
+    stream = fopen("bin/wapsort.txt", "r");
         if (stream == NULL) {
-        printf("wap.txt cannot be opened");
+        printf("wapsort.txt cannot be opened");
         return 1;
     }
     fscanf(stream, "%s", word[0]);
@@ -29,9 +29,10 @@ int main()
         fscanf(stream, "%s", word[i]);
         bstree_add(tree, word[i], i);
     }
-    key = getrand(1, n-1);
+    //key = getrand(1, n-1);
     t = wtime();
-    node = bstree_lookup(tree, key);
+    //node = bstree_lookup(tree, key);
+    node = bstree_max(tree);
     t = wtime() - t;
     printf("%d %.6f\n", n, t);
     fclose(stream);
