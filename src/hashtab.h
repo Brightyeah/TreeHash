@@ -10,7 +10,7 @@ struct listnode {
 };
 struct listnode *hashtab[HASH_SIZE];
 
-unsigned int hashtab_hash(char *value);
+unsigned int hashtab_hash(char *value, int length);
 void hashtab_init(struct listnode **hashtab);
 void hashtab_add(struct listnode **hashtab, char *value, int key);
 struct listnode *hashtab_lookup(struct listnode **hashtab, char *value);
