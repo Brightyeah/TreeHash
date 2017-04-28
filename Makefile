@@ -1,26 +1,25 @@
 .PHONY = all dir
 
-FO1 = build/main.o
-FO2 = build/hashtab.o
-FC1 = src/main.c
-FC2 = src/hashtab.c
-PROG = bin/main
+FOH1 = build/main_hash.o
+FOH2 = build/hashtab.o
+FCH1 = src/main_hash.c
+FCH2 = src/hashtab.c
+PROGH = bin/hash
 GFLAG = gcc -Wall -o
 
-all: clean dir $(PROG)
+all: clean dir $(PROGH)
 
 dir:
 	mkdir build
 
-$(FO1): $(FC1) src/hashtab.h
-	$(GFLAG) $(FO1) -c $(FC1)
+$(FOH1): $(FCH1) src/hashtab.h
+	$(GFLAG) $(FOH1) -c $(FCH1)
 
-$(FO2): $(FC2)
-	$(GFLAG) $(FO2) -c $(FC2)
+$(FOH2): $(FCH2)
+	$(GFLAG) $(FOH2) -c $(FCH2)
 
-$(PROG): $(FO1) $(FO2)
-	$(GFLAG) $(PROG) $(FO1) $(FO2)
+$(PROGH): $(FOH1) $(FOH2)
+	$(GFLAG) $(PROGH) $(FOH1) $(FOH2)
 
 clean:
-	rm -rf build
-	rm -rf bin/*.exe
+	rm -rf build bin/*.exe
