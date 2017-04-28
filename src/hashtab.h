@@ -2,7 +2,7 @@
 #define HASHTAB_H
 #define HASH_SIZE 71
 #define HASH_MUL 31
-
+#include <inttypes.h>
 struct listnode {
     char *value;
     int key;
@@ -10,7 +10,7 @@ struct listnode {
 };
 struct listnode *hashtab[HASH_SIZE];
 
-unsigned int hashtab_hash(char *value, int length);
+uint32_t hashtab_hash(char *value, int len);
 void hashtab_init(struct listnode **hashtab);
 void hashtab_add(struct listnode **hashtab, char *value, int key);
 struct listnode *hashtab_lookup(struct listnode **hashtab, char *value);

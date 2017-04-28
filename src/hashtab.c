@@ -5,11 +5,11 @@
 #include <stdint.h>
 #include <stdio.h>
 
-unsigned int hashtab_hash(char *value, int length)
+uint32_t hashtab_hash(char *value, int len)
 {
-    unsigned int hash = 0;
+    uint32_t hash = 0;
     int i = 0;
-    while (i != length) {
+    while (i != len) {
         hash += value[i++];
         hash += hash << 10;
         hash ^= hash >> 6;
@@ -17,7 +17,7 @@ unsigned int hashtab_hash(char *value, int length)
     hash += hash << 3;
     hash ^= hash >> 11;
     hash += hash << 15;
-    return hash;
+    return hash % HASH_SIZE;
 }
 
 void hashtab_init(struct listnode **hashtab)
@@ -30,7 +30,7 @@ void hashtab_init(struct listnode **hashtab)
 void hashtab_add(struct listnode **hashtab, char *value, int key)
 {
     struct listnode *add;
-    unsigned int index = hashtab_hash(value, strlen(value));
+    uint32_t index = hashtab_hash(value, strlen(value));
     add = malloc(sizeof(*add));
     if (add != NULL) {
         add->value = value;
@@ -42,7 +42,7 @@ void hashtab_add(struct listnode **hashtab, char *value, int key)
 
 struct listnode *hashtab_lookup(struct listnode **hashtab, char *value)
 {
-    unsigned int index = hashtab_hash(value, strlen(value));
+    int index = hashtab_hash(value, strlen(value) - 1);
     struct listnode *node;
     for (node = hashtab[index]; node != NULL; node = node->next) {
         if (strcmp(node->value, value) == 0) {
@@ -51,10 +51,10 @@ struct listnode *hashtab_lookup(struct listnode **hashtab, char *value)
     }
     return NULL;
 }
-
+/*
 void hashtab_delete(struct listnode **hashtab, char *value)
 {
-    int index = hashtab_hash(value, strlen(value));
+    unsigned index = hashtab_hash(value);
     struct listnode *p, *res;
     for (p = hashtab[index]; p != NULL; p = p->next) {
         if (strcmp(p->value, value) == 0) {
@@ -68,4 +68,4 @@ void hashtab_delete(struct listnode **hashtab, char *value)
         }
         res = p;
     }
-}
+}*/

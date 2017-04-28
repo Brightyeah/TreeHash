@@ -4,18 +4,20 @@
 #include <sys/time.h>
 #include <inttypes.h>
 #include <string.h>
+#include <stdint.h>
 
 double wtime();
 int getrand(int min, int max);
 
 int main()
 {
-    int i = 0, n, key, summ = 0, collision[n];
+    int i = 0, n, key, summ = 0;
     struct listnode *hashtab[HASH_SIZE], *node;
     printf("Enter n: ");
     scanf("%d", &n);
-    for (i = 0; i < n; i++) {
-        collision[i] = 0;
+    int coll[HASH_SIZE];
+    for (i = 0; i < HASH_SIZE; i++) {
+        coll[i] = 0;
     }
     char word[n][15];
     double t;
@@ -27,17 +29,17 @@ int main()
     }
 
     hashtab_init(hashtab);
-    for (i = 0; i < n; i++) {
+    for (i = 1; i < n; i++) {
         fscanf(stream, "%s", word[i]);
         hashtab_add(hashtab, word[i], i);
-        collision[hashtab_hash(word[i], strlen(word[i]))]++;
+        coll[hashtab_hash(word[i], strlen(word[i]) - 1)]++;
     }
 
-    for (i = 0; i < n; i++) {
-        if (collision[i] > 0) {
-            collision[i]--;
+    for (i = 0; i < HASH_SIZE; i++) {
+        if (coll[i] > 0) {
+            coll[i]--;
         }
-        summ += collision[i];
+        summ += coll[i];
     }
 
     key = getrand(1, n - 1);
