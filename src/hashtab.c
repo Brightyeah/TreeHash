@@ -4,8 +4,30 @@
 #include <malloc.h>
 #include <stdint.h>
 #include <stdio.h>
+#define FUNK 0
 
-uint32_t hashtab_hash(char *value, int len)
+unsigned int hashtab_hash(char *value, int len)
+{
+    unsigned int hash;
+    if (FUNK == 1) {
+        hash = jenkins_one_at_a_time_hash(value, len);
+    } else {
+        hash = hash_kp(value);
+    }
+    return hash % HASH_SIZE;
+}
+
+unsigned int hash_kp(char *value)
+{
+    unsigned int hash = 0;
+    char *p;
+    for (p = value; *p != '\0'; p++) {
+        hash = hash * HASH_MUL + (unsigned int)*p;
+    }
+    return hash;
+}
+
+uint32_t jenkins_one_at_a_time_hash(char *value, int len)
 {
     uint32_t hash = 0;
     int i = 0;
@@ -17,7 +39,7 @@ uint32_t hashtab_hash(char *value, int len)
     hash += hash << 3;
     hash ^= hash >> 11;
     hash += hash << 15;
-    return hash % HASH_SIZE;
+    return hash;
 }
 
 void hashtab_init(struct listnode **hashtab)

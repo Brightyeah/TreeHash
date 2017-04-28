@@ -11,7 +11,7 @@ int getrand(int min, int max);
 
 int main()
 {
-    int i = 0, n, key, summ = 0;
+    int i = 0, n, summ = 0;
     struct listnode *hashtab[HASH_SIZE], *node;
     printf("Enter n: ");
     scanf("%d", &n);
@@ -20,10 +20,9 @@ int main()
         coll[i] = 0;
     }
     char word[n][15];
-    double t;
     FILE *stream;
     stream = fopen("bin/wap.txt", "r");
-        if (stream == NULL) {
+    if (stream == NULL) {
         printf("wap.txt cannot be opened");
         return 1;
     }
@@ -42,12 +41,13 @@ int main()
         summ += coll[i];
     }
 
-    key = getrand(1, n - 1);
-    t = wtime();
+    int key = getrand(1, n - 1);
+    double t = wtime();
     node = hashtab_lookup(hashtab, word[key]);
     t = wtime() - t;
     printf("%d %.6f\n", n, t);
     printf("Collisions: %d\n", summ);
+
     fclose(stream);
     return 0;
 }
