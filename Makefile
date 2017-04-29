@@ -1,26 +1,25 @@
 .PHONY = all dir
 
-FO1 = build/main.o
-FO2 = build/bstree.o
-FC1 = src/main.c
-FC2 = src/bstree.c
-PROG = bin/main
+FOT1 = build/main_tree.o
+FOT2 = build/bstree.o
+FCT1 = src/main_tree.c
+FCT2 = src/bstree.c
+PROGT = bin/main_tree
 GFLAG = gcc -Wall -o
 
-all: clean dir $(PROG)
+all: clean dir $(PROGT)
 
 dir:
 	mkdir build
 
-$(FO2): $(FC2)
-	$(GFLAG) $(FO2) -c $(FC2)
+$(FOT2): $(FCT2)
+	$(GFLAG) $(FOT2) -c $(FCT2)
 
-$(FO1): $(FC1) src/bstree.h
-	$(GFLAG) $(FO1) -c $(FC1)
+$(FOT1): $(FCT1) src/bstree.h
+	$(GFLAG) $(FOT1) -c $(FCT1)
 
-$(PROG): $(FO1) $(FO2)
-	$(GFLAG) $(PROG) $(FO1) $(FO2)
+$(PROGT): $(FOT1) $(FOT2)
+	$(GFLAG) $(PROGT) $(FOT1) $(FOT2)
 
 clean:
-	rm -rf build
-	rm -rf bin/*.exe
+	rm -rf build  bin/*.exe
